@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -41,7 +42,7 @@ export const Title = styled.h1`
 
   color: #322153;
 
-  margin: 0 0 40px;
+  margin: 40px 0;
 
   span#highlight {
     color: #ac38ff;
@@ -65,7 +66,7 @@ export const Description = styled.p`
   }
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled(Link)`
   display: flex;
   width: 320px;
   height: 60px;

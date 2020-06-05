@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 
 import game from '../../assets/game.png';
 
 import Header from '../../components/Header';
+
 import {
   Container,
   Title,
@@ -33,17 +33,15 @@ const Home: React.FC = () => {
           não importa qual seja.
         </Description>
 
-        <Link to="/add-game">
-          <ButtonContainer>
-            <LeftSideButton id="left-button">
-              <FiPlus color="#FFF" size={24} />
-            </LeftSideButton>
+        <ButtonContainer to="/add-game">
+          <LeftSideButton id="left-button">
+            <FiPlus color="#FFF" size={24} />
+          </LeftSideButton>
 
-            <RightSideButton id="right-button">
-              <TextButton>Cadastre um jogo para doação</TextButton>
-            </RightSideButton>
-          </ButtonContainer>
-        </Link>
+          <RightSideButton id="right-button">
+            <TextButton>Cadastre um jogo para doação</TextButton>
+          </RightSideButton>
+        </ButtonContainer>
       </div>
       <div id="right">
         <img id="gamers" src={game} alt="gamers" />
