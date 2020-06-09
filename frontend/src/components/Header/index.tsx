@@ -4,9 +4,9 @@ import logo from '../../assets/logo.png';
 import { Container } from './styles';
 
 const Header: React.FC = () => {
-  return(
+  return (
     <Container>
-      <img src={logo} />
+      <img src={logo} alt="old games logo" />
     </Container>
   );
 };
