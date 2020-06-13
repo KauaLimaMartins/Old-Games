@@ -1,12 +1,11 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width: Width, height: Height } = Dimensions.get('window');
+import { StyleSheet, Platform } from 'react-native';
+import Constants from 'expo-constants';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 32,
-        // paddingTop: 20 + Constants.statusBarHeight,
+        paddingTop: Platform.OS === 'ios' ? 20 : Constants.statusBarHeight + 20,
     },
 
     title: {
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     mapMarkerContainer: {
         width: 90,
         height: 70,
-        backgroundColor: '#34CB79',
+        backgroundColor: '#B753FF',
         flexDirection: 'column',
         borderRadius: 8,
         overflow: 'hidden',
@@ -62,12 +61,13 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 13,
         lineHeight: 23,
+        textAlign: 'center',
     },
 
     itemsContainer: {
         flexDirection: 'row',
         marginTop: 16,
-        marginBottom: 32,
+        marginBottom: Platform.OS === 'ios' ? 20 : 32,
     },
 
     item: {
@@ -87,12 +87,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 
-    selectedItem: {
-        borderColor: '#34CB79',
+    selectedConsole: {
+        borderColor: '#AC38FF',
         borderWidth: 2,
     },
 
-    itemTitle: {
+    consoleTitle: {
         fontFamily: 'Roboto_400Regular',
         textAlign: 'center',
         fontSize: 13,
