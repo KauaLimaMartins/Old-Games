@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -34,15 +34,6 @@ const styles = StyleSheet.create({
     footer: {},
 
     select: {},
-
-    input: {
-        height: 60,
-        backgroundColor: '#FFF',
-        borderRadius: 10,
-        marginBottom: 8,
-        paddingHorizontal: 24,
-        fontSize: 16,
-    },
 
     button: {
         backgroundColor: '#AC38FF',
