@@ -164,168 +164,166 @@ const NewGame: React.FC = () => {
         }
     }
 
-    return <SuccessMessage />;
+    return finished ? (
+        <SuccessMessage />
+    ) : (
+        <Container>
+            <TopContainer>
+                <Header />
+                <GoBack />
+            </TopContainer>
+            <CenterContainer onSubmit={handleSubmit}>
+                <h1 id="principal-title">Cadastro do jogo</h1>
 
-    // return finished ? (
-    //     <SuccessMessage />
-    // ) : (
-    //     <Container>
-    //         <TopContainer>
-    //             <Header />
-    //             <GoBack />
-    //         </TopContainer>
-    //         <CenterContainer onSubmit={handleSubmit}>
-    //             <h1 id="principal-title">Cadastro do jogo</h1>
+                <FieldsetContainer>
+                    <legend>
+                        <h2>Dados Pessoais</h2>
+                    </legend>
 
-    //             <FieldsetContainer>
-    //                 <legend>
-    //                     <h2>Dados Pessoais</h2>
-    //                 </legend>
+                    <div className="field">
+                        <FieldsetLabel htmlFor="owner">
+                            Nome do(a) doador(a)
+                        </FieldsetLabel>
+                        <FieldsetInput
+                            type="text"
+                            name="owner"
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
-    //                 <div className="field">
-    //                     <FieldsetLabel htmlFor="owner">
-    //                         Nome do(a) doador(a)
-    //                     </FieldsetLabel>
-    //                     <FieldsetInput
-    //                         type="text"
-    //                         name="owner"
-    //                         onChange={handleInputChange}
-    //                     />
-    //                 </div>
+                    <div className="container">
+                        <div className="field" id="email">
+                            <FieldsetLabel htmlFor="email">Email</FieldsetLabel>
+                            <FieldsetInput
+                                type="text"
+                                name="email"
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className="field" id="whatsapp">
+                            <FieldsetLabel htmlFor="whatsapp">
+                                Whatsapp
+                            </FieldsetLabel>
+                            <FieldsetInput
+                                type="text"
+                                name="whatsapp"
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                    </div>
+                </FieldsetContainer>
 
-    //                 <div className="container">
-    //                     <div className="field" id="email">
-    //                         <FieldsetLabel htmlFor="email">Email</FieldsetLabel>
-    //                         <FieldsetInput
-    //                             type="text"
-    //                             name="email"
-    //                             onChange={handleInputChange}
-    //                         />
-    //                     </div>
-    //                     <div className="field" id="whatsapp">
-    //                         <FieldsetLabel htmlFor="whatsapp">
-    //                             Whatsapp
-    //                         </FieldsetLabel>
-    //                         <FieldsetInput
-    //                             type="text"
-    //                             name="whatsapp"
-    //                             onChange={handleInputChange}
-    //                         />
-    //                     </div>
-    //                 </div>
-    //             </FieldsetContainer>
+                <FieldsetContainer>
+                    <legend>
+                        <h2>Dados do jogo</h2>
+                    </legend>
 
-    //             <FieldsetContainer>
-    //                 <legend>
-    //                     <h2>Dados do jogo</h2>
-    //                 </legend>
+                    <div className="field">
+                        <FieldsetLabel htmlFor="game_name">
+                            Nome do jogo
+                        </FieldsetLabel>
+                        <FieldsetInput
+                            type="text"
+                            name="game_name"
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
-    //                 <div className="field">
-    //                     <FieldsetLabel htmlFor="game_name">
-    //                         Nome do jogo
-    //                     </FieldsetLabel>
-    //                     <FieldsetInput
-    //                         type="text"
-    //                         name="game_name"
-    //                         onChange={handleInputChange}
-    //                     />
-    //                 </div>
+                    <div className="field">
+                        <FieldsetLabel htmlFor="game_description">
+                            Descrição
+                        </FieldsetLabel>
+                        <DescriptionInput
+                            name="game_description"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </FieldsetContainer>
 
-    //                 <div className="field">
-    //                     <FieldsetLabel htmlFor="game_description">
-    //                         Descrição
-    //                     </FieldsetLabel>
-    //                     <DescriptionInput
-    //                         name="game_description"
-    //                         onChange={handleInputChange}
-    //                     />
-    //                 </div>
-    //             </FieldsetContainer>
+                <FieldsetContainer>
+                    <legend>
+                        <h2>Endereço</h2>
+                        <span>Selecione o endereço no mapa</span>
+                    </legend>
 
-    //             <FieldsetContainer>
-    //                 <legend>
-    //                     <h2>Endereço</h2>
-    //                     <span>Selecione o endereço no mapa</span>
-    //                 </legend>
+                    <Map
+                        center={initialPosition}
+                        zoom={15}
+                        className="map"
+                        onClick={handleMapClick}
+                    >
+                        <TileLayer
+                            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={selectedPosition} />
+                    </Map>
 
-    //                 <Map
-    //                     center={initialPosition}
-    //                     zoom={15}
-    //                     className="map"
-    //                     onClick={handleMapClick}
-    //                 >
-    //                     <TileLayer
-    //                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    //                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    //                     />
-    //                     <Marker position={selectedPosition} />
-    //                 </Map>
+                    <div className="container">
+                        <div className="field" id="uf">
+                            <FieldsetLabel htmlFor="uf">
+                                Estado (UF)
+                            </FieldsetLabel>
+                            <SelectInput
+                                onChange={handleSelectUf}
+                                value={selectedUf}
+                                name="uf"
+                                id="uf"
+                            >
+                                <option value="0">Selecione uma UF</option>
+                                {ufs.map((uf: string) => (
+                                    <option key={uf} value={uf}>
+                                        {uf}
+                                    </option>
+                                ))}
+                            </SelectInput>
+                        </div>
+                        <div className="field" id="city">
+                            <FieldsetLabel htmlFor="city">Cidade</FieldsetLabel>
+                            <SelectInput
+                                onChange={handleSelectCity}
+                                name="city"
+                                id="city"
+                            >
+                                <option value="0">Selecione sua cidade</option>
+                                {cities.map((city: string) => (
+                                    <option key={city} value={city}>
+                                        {city}
+                                    </option>
+                                ))}
+                            </SelectInput>
+                        </div>
+                    </div>
+                </FieldsetContainer>
 
-    //                 <div className="container">
-    //                     <div className="field" id="uf">
-    //                         <FieldsetLabel htmlFor="uf">
-    //                             Estado (UF)
-    //                         </FieldsetLabel>
-    //                         <SelectInput
-    //                             onChange={handleSelectUf}
-    //                             value={selectedUf}
-    //                             name="uf"
-    //                             id="uf"
-    //                         >
-    //                             <option value="0">Selecione uma UF</option>
-    //                             {ufs.map((uf: string) => (
-    //                                 <option key={uf} value={uf}>
-    //                                     {uf}
-    //                                 </option>
-    //                             ))}
-    //                         </SelectInput>
-    //                     </div>
-    //                     <div className="field" id="city">
-    //                         <FieldsetLabel htmlFor="city">Cidade</FieldsetLabel>
-    //                         <SelectInput
-    //                             onChange={handleSelectCity}
-    //                             name="city"
-    //                             id="city"
-    //                         >
-    //                             <option value="0">Selecione sua cidade</option>
-    //                             {cities.map((city: string) => (
-    //                                 <option key={city} value={city}>
-    //                                     {city}
-    //                                 </option>
-    //                             ))}
-    //                         </SelectInput>
-    //                     </div>
-    //                 </div>
-    //             </FieldsetContainer>
+                <FieldsetContainer>
+                    <legend>
+                        <h2>Console</h2>
+                        <span>Selecione de qual console é o seu jogo</span>
+                    </legend>
 
-    //             <FieldsetContainer>
-    //                 <legend>
-    //                     <h2>Console</h2>
-    //                     <span>Selecione de qual console é o seu jogo</span>
-    //                 </legend>
+                    <GridConsoles>
+                        {consoles.map((item) => (
+                            <li
+                                key={item.id}
+                                onClick={() => handleSelectConsole(item.id)}
+                                className={
+                                    selectedConsole === item.id
+                                        ? 'selected'
+                                        : ''
+                                }
+                            >
+                                <img src={item.image_url} alt={item.title} />
+                                <span>{item.title}</span>
+                            </li>
+                        ))}
+                    </GridConsoles>
+                </FieldsetContainer>
 
-    //                 <GridConsoles>
-    //                     {consoles.map((item) => (
-    //                         <li
-    //                             key={item.id}
-    //                             onClick={() => handleSelectConsole(item.id)}
-    //                             className={
-    //                                 selectedConsole === item.id
-    //                                     ? 'selected'
-    //                                     : ''
-    //                             }
-    //                         >
-    //                             <img src={item.image_url} alt={item.title} />
-    //                             <span>{item.title}</span>
-    //                         </li>
-    //                     ))}
-    //                 </GridConsoles>
-    //             </FieldsetContainer>
-
-    //             <SubmitButton>Cadastrar jogo</SubmitButton>
-    //         </CenterContainer>
-    //     </Container>
-    // );
+                <SubmitButton>Cadastrar jogo</SubmitButton>
+            </CenterContainer>
+        </Container>
+    );
 };
 
 export default NewGame;
