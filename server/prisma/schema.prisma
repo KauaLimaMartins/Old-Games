@@ -1,38 +1,46 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("TESTS_DATABASE_URL")
 }
 
 model consoles {
-  id             Int              @default(autoincrement()) @id
-  image          String
-  title          String
-  games_consoles games_consoles[]
+    id             Int              @default(autoincrement()) @id
+    image          String
+    title          String
+    games_consoles games_consoles[]
 }
 
 model games {
-  city             String
-  email            String
-  game_description String
-  game_name        String
-  id               Int              @default(autoincrement()) @id
-  image            String
-  latitude         Float
-  longitude        Float
-  owner            String
-  uf               String
-  whatsapp         String
-  games_consoles   games_consoles[]
+    city             String
+    game_description String
+    game_name        String
+    id               Int              @default(autoincrement()) @id
+    image            String
+    latitude         Float
+    longitude        Float
+    owner_id         Int
+    uf               String
+    users            users            @relation(fields: [owner_id], references: [id])
+    games_consoles   games_consoles[]
 }
 
 model games_consoles {
-  console_id Int
-  game_id    Int
-  id         Int      @default(autoincrement()) @id
-  consoles   consoles @relation(fields: [console_id], references: [id])
-  games      games    @relation(fields: [game_id], references: [id])
+    console_id Int
+    game_id    Int
+    id         Int      @default(autoincrement()) @id
+    consoles   consoles @relation(fields: [console_id], references: [id])
+    games      games    @relation(fields: [game_id], references: [id])
+}
+
+model users {
+    id            Int     @default(autoincrement()) @id
+    name          String
+    email         String  @unique
+    whatsapp      String
+    password_hash String
+    games         games[]
 }
