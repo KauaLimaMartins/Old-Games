@@ -4,7 +4,6 @@ package-lock.json
 yarn-error.log
 debug.log
 
-*/.gitignore
 */.env
 
 server/prisma/.env
