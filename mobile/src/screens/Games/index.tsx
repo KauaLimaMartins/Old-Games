@@ -81,15 +81,15 @@ const Games: React.FC = () => {
     }, [selectedConsole]);
 
     // Functions
-    function handleNavigateBack(): void {
+    function handleNavigateBack() {
         navigation.goBack();
     }
 
-    function handleNavigateToDetail(game_id: number): void {
+    function handleNavigateToDetail(game_id: number) {
         navigation.navigate('Details', { game_id });
     }
 
-    function handleSelectConsole(consoleId: number): void {
+    function handleSelectConsole(consoleId: number) {
         setSelectedConsole(consoleId);
     }
 
