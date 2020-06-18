@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { resolve } from 'path';
+import path from 'path';
 
 import routes from './routes';
 
@@ -21,9 +21,14 @@ class App {
 
   private router(): void {
     this.app.use(routes);
+
+    this.app.use(
+      '/consoles',
+      express.static(path.resolve(__dirname, '..', 'temp', 'consoles'))
+    );
     this.app.use(
       '/uploads',
-      express.static(resolve(__dirname, '..', 'uploads'))
+      express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
     );
   }
 }
