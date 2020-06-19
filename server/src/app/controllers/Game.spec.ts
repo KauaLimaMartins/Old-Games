@@ -12,7 +12,7 @@ describe('Games', () => {
   //     });
   // });
 
-  test('Should create a game with valid credentials', async () => {
+  it('Should create a game with valid credentials', async () => {
     // const body = {
     //     city: 'test',
     //     game_description: 'test',

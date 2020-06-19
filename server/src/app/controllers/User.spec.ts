@@ -1,23 +1,24 @@
 import request from 'supertest';
 import { PrismaClient } from '@prisma/client';
 
+import Password from '../../utils/Password';
 import app from '../../app';
 
 const prisma = new PrismaClient();
 
-describe('users', () => {
+describe('Users', () => {
   beforeAll(async () => {
     await prisma.users.deleteMany({
       where: {
-        name: 'userTest',
+        name: 'test',
       },
     });
   });
 
   test('Should create a user with valid credentials', async () => {
     const body = {
-      name: 'userTest',
-      email: 'userTest@test.com.br',
+      name: 'test',
+      email: 'userTest2@test.com.br',
       whatsapp: '1920930192',
       password: '123456',
     };
@@ -27,16 +28,29 @@ describe('users', () => {
     expect(response.status).toBe(200);
   });
 
-  test('Should delete user', async () => {
+  test('Should delete a user', async () => {
+    const body = {
+      email: 'test9@test.com',
+      password: '1823891892',
+    };
+
+    const hash = await Password.generateHash(body.password);
+
     await prisma.users.create({
       data: {
-        name: 'userTest',
-        email: 'userTest@test.com.br',
-        whatsapp: '1920930192',
-        password_hash: '123456',
+        name: 'test',
+        email: 'test9@test.com',
+        whatsapp: '119922',
+        password_hash: hash,
       },
     });
 
-    const response = await request(app).delete('/users');
+    const auth = await request(app).post('/sessions').send(body);
+
+    const response = await request(app)
+      .delete('/users')
+      .set('Authorization', 'bearer ' + auth.body.token);
+
+    expect(response.status).toBe(200);
   });
 });

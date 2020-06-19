@@ -7,7 +7,6 @@ import ConsoleController from './app/controllers/ConsoleController';
 import GameController from './app/controllers/GameController';
 
 import authMiddleware from './app/middlewares/auth';
-
 import multerConfig from './config/multer';
 
 const routes = Router();
@@ -25,5 +24,7 @@ routes.get('/games', GameController.index);
 routes.use(authMiddleware);
 
 routes.post('/games', upload.single('image'), GameController.store);
+
+routes.delete('/users', UserController.destroy);
 
 export default routes;

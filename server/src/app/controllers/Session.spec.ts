@@ -15,7 +15,7 @@ describe('Authenticate', () => {
     });
   });
 
-  test('Should athenticate with valid credentials', async () => {
+  it('Should athenticate with valid credentials', async () => {
     const body = {
       email: 'test@test.com',
       password: '123',
@@ -37,7 +37,7 @@ describe('Authenticate', () => {
     expect(response.status).toBe(200);
   });
 
-  test('Should not authenticate with invalid credentials', async () => {
+  it('Should not authenticate with invalid credentials', async () => {
     const body = {
       email: 'test2@test.com',
       password: '1823891892',
@@ -59,7 +59,7 @@ describe('Authenticate', () => {
     expect(response.status).toBe(401);
   });
 
-  test('Should return jwt token when authenticated', async () => {
+  it('Should return jwt token when authenticated', async () => {
     const body = {
       email: 'test3@test.com',
       password: '1823891892',
