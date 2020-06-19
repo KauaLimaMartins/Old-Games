@@ -32,6 +32,26 @@ class UserController {
 
     return res.json(user.name);
   }
+
+  public async destroy(req: Request, res: Response): Promise<Response> {
+    const user = await prisma.users.findOne({
+      where: {
+        id: Number(req.userId),
+      },
+    });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Not permitted' });
+    }
+
+    await prisma.users.delete({
+      where: {
+        id: user?.id,
+      },
+    });
+
+    return res.status(200).send();
+  }
 }
 
 export default new UserController();
