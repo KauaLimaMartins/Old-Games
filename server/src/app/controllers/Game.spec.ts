@@ -97,17 +97,16 @@ describe('Games', function (): void {
         longitude: 0,
         users: {
           connect: {
-            email: 'test@test.com.br',
+            id: user.id,
           },
         },
       },
     });
 
     const response = await request(app)
-      .put('/games')
-      .set('Authorization', 'barer ' + auth.body.token)
+      .put(`/games/${game.id}`)
       .query({ id: game.id })
-      .send(body);
+      .set('Authorization', 'barer ' + auth.body.token);
 
     expect(response.status).toBe(200);
   });
