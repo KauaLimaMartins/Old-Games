@@ -3,8 +3,8 @@ import * as Yup from 'yup';
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 
-import Password from '../../utils/Password';
-import authConfig from '../../config/auth';
+import Password from '@utils/Password';
+import authConfig from '@configs/auth';
 
 const prisma = new PrismaClient();
 

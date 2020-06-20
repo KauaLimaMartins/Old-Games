@@ -36,7 +36,7 @@ class GameController {
     return res.json(serializedGames);
   }
 
-  public async show(req: Request, res: Response): Promise<Response<JSON>> {
+  public async show(req: Request, res: Response): Promise<Response> {
     const game = await prisma.games.findOne({
       where: {
         id: Number(req.params.id),
@@ -68,7 +68,7 @@ class GameController {
     return res.json({ game: serializedGame, consoleTitle });
   }
 
-  public async store(req: Request, res: Response): Promise<Response<JSON>> {
+  public async store(req: Request, res: Response): Promise<Response> {
     const schema = Yup.object().shape({
       game_name: Yup.string().required(),
       game_description: Yup.string().required(),
@@ -141,6 +141,10 @@ class GameController {
     }
 
     return res.json(game);
+  }
+
+  public async update(req: Request, res: Response): Promise<Response> {
+    return res.status(200).send();
   }
 }
 
