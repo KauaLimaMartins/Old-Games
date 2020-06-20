@@ -1,9 +1,9 @@
 import request from 'supertest';
 import { PrismaClient } from '@prisma/client';
 
-import Password from '../../utils/Password';
-import app from '../../app';
-import truncate from '../../utils/truncate';
+import Password from '@utils/Password';
+import app from '@src/app';
+import truncate from '@utils/truncate';
 
 const prisma = new PrismaClient();
 

@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules --no-notify src/server.ts",
     "test": "jest"
   },
   "devDependencies": {
@@ -29,6 +29,7 @@
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.0",
     "ts-node-dev": "^1.0.0-pre.44",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.5"
   },
   "dependencies": {

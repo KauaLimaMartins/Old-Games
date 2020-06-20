@@ -3,7 +3,14 @@
     "target": "es2017",
     "module": "commonjs",
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@utils/*": ["./src/utils/*"],
+      "@configs/*": ["./src/configs/*"],
+      "@src/*": ["./src/*"],
+      "@controllers/*": ["./src/app/controllers/*"]
+    },
     "lib": ["ES6"],
     "typeRoots": ["./node_modules/@types", "./src/@types"],
     "allowJs": true,
@@ -13,5 +20,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "removeComments": true
-  }
+  },
+  "include": ["./src/**/*"]
 }
