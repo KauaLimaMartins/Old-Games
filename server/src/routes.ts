@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import UserController from './app/controllers/UserController';
-import SessionController from './app/controllers/SessionController';
-import ConsoleController from './app/controllers/ConsoleController';
-import GameController from './app/controllers/GameController';
+import UserController from '@controllers/UserController';
+import SessionController from '@controllers/SessionController';
+import ConsoleController from '@controllers/ConsoleController';
+import GameController from '@controllers/GameController';
 
 import authMiddleware from './app/middlewares/auth';
-import multerConfig from './config/multer';
+import multerConfig from '@configs/multer';
 
 const routes = Router();
 const upload = multer(multerConfig);
