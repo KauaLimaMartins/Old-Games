@@ -3,29 +3,28 @@ import { PrismaClient } from '@prisma/client';
 
 import app from '../../app';
 import Password from '../../utils/Password';
+import truncate from '../../utils/truncate';
 
 const prisma = new PrismaClient();
 
-describe('Authenticate', () => {
-  beforeAll(async () => {
-    await prisma.users.deleteMany({
-      where: {
-        name: 'test',
-      },
-    });
+describe('Authenticate', function (): void {
+  beforeAll(async function (): Promise<void> {
+    await truncate();
   });
 
-  it('Should athenticate with valid credentials', async () => {
+  test('Should athenticate with valid credentials', async function (): Promise<
+    void
+  > {
     const body = {
-      email: 'test@test.com',
-      password: '123',
+      email: 'test4@test.com.br',
+      password: '1234567',
     };
 
     const hash = await Password.generateHash(body.password);
 
     await prisma.users.create({
       data: {
-        name: 'test',
+        name: 'test2',
         email: body.email,
         whatsapp: '129319',
         password_hash: hash,
@@ -37,9 +36,11 @@ describe('Authenticate', () => {
     expect(response.status).toBe(200);
   });
 
-  it('Should not authenticate with invalid credentials', async () => {
+  test('Should not authenticate with invalid credentials', async function (): Promise<
+    void
+  > {
     const body = {
-      email: 'test2@test.com',
+      email: 'test3@test.com.br',
       password: '1823891892',
     };
 
@@ -47,8 +48,8 @@ describe('Authenticate', () => {
 
     await prisma.users.create({
       data: {
-        name: 'test',
-        email: 'tes@tes.com',
+        name: 'test2',
+        email: 'test3@test.com.br',
         whatsapp: '1197654',
         password_hash: hash,
       },
@@ -59,9 +60,11 @@ describe('Authenticate', () => {
     expect(response.status).toBe(401);
   });
 
-  it('Should return jwt token when authenticated', async () => {
+  test('Should return jwt token when authenticated', async function (): Promise<
+    void
+  > {
     const body = {
-      email: 'test3@test.com',
+      email: 'test2@test.com.br',
       password: '1823891892',
     };
 
@@ -69,8 +72,8 @@ describe('Authenticate', () => {
 
     await prisma.users.create({
       data: {
-        name: 'test',
-        email: 'test3@test.com',
+        name: 'test2',
+        email: 'test2@test.com.br',
         whatsapp: '119922',
         password_hash: hash,
       },

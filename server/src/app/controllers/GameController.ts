@@ -70,10 +70,6 @@ class GameController {
 
   public async store(req: Request, res: Response): Promise<Response<JSON>> {
     const schema = Yup.object().shape({
-      image: Yup.string(),
-      owner: Yup.string().required(),
-      email: Yup.string().required(),
-      whatsapp: Yup.string().required(),
       game_name: Yup.string().required(),
       game_description: Yup.string().required(),
       latitude: Yup.number().required(),
@@ -99,18 +95,18 @@ class GameController {
 
     const game = await prisma.games.create({
       data: {
-        users: {
-          connect: {
-            id: 0,
-          },
-        },
-        image: req.file.filename,
+        image: 'req.file.filename',
         game_name,
         game_description,
         latitude: Number(latitude),
         longitude: Number(longitude),
         city,
         uf,
+        users: {
+          connect: {
+            id: req.userId,
+          },
+        },
       },
     });
 
@@ -120,7 +116,7 @@ class GameController {
         data: {
           consoles: {
             connect: {
-              id: Number(console_id),
+              id: console_id,
             },
           },
           games: {

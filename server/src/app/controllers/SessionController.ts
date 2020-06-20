@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import * as Yup from 'yup';
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 
@@ -9,6 +10,15 @@ const prisma = new PrismaClient();
 
 class SessionController {
   public async store(req: Request, res: Response) {
+    const schema = Yup.object().shape({
+      email: Yup.string().required().email(),
+      password: Yup.string().min(6).required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation Fails' });
+    }
+
     const { email, password } = req.body;
 
     const user = await prisma.users.findOne({
