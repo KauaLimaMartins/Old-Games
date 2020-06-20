@@ -144,7 +144,43 @@ class GameController {
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    return res.status(200).send();
+    const schema = Yup.object().shape({
+      game_name: Yup.string(),
+      game_description: Yup.string(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
+    const { id } = req.query;
+
+    const game = await prisma.games.findOne({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    if (game?.owner_id !== req.userId) {
+      return res
+        .status(401)
+        .json({ error: 'You can only edit games that you have registered' });
+    }
+
+    const { game_name, game_description } = req.body;
+
+    await prisma.games.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        game_name,
+        game_description,
+        image: req.file !== undefined ? req.file.filename : game.image,
+      },
+    });
+
+    return res.json({ game_name, game_description });
   }
 }
 
