@@ -182,6 +182,30 @@ class GameController {
 
     return res.json({ game_name, game_description });
   }
+
+  public async destroy(req: Request, res: Response): Promise<Response> {
+    const { id } = req.query;
+
+    const game = await prisma.games.findOne({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    if (game?.owner_id !== req.userId) {
+      return res
+        .status(401)
+        .json({ error: 'You can only delete games that you have registered' });
+    }
+
+    await prisma.games.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    return res.status(200).send();
+  }
 }
 
 export default new GameController();

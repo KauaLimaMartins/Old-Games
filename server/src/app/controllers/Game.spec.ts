@@ -110,4 +110,50 @@ describe('Games', function (): void {
 
     expect(response.status).toBe(200);
   });
+
+  test('Should delete a game of the logged user', async function (): Promise<
+    void
+  > {
+    const hash = await Password.generateHash('123456789');
+
+    // Create a user to authenticate
+    const user = await prisma.users.create({
+      data: {
+        name: 'test1',
+        email: 'test3@test.com.br',
+        whatsapp: '119999',
+        password_hash: hash,
+      },
+    });
+
+    // Login with the account created before
+    const auth = await request(app).post('/sessions').send({
+      email: 'test3@test.com.br',
+      password: '123456789',
+    });
+
+    const game = await prisma.games.create({
+      data: {
+        city: 'test',
+        uf: 'test',
+        game_description: 'test',
+        game_name: 'test',
+        image: 'fake',
+        latitude: 0,
+        longitude: 0,
+        users: {
+          connect: {
+            id: user.id,
+          },
+        },
+      },
+    });
+
+    const response = await request(app)
+      .delete(`/games/${game.id}`)
+      .query({ id: game.id })
+      .set('Authorization', 'barer ' + auth.body.token);
+
+    expect(response.status).toBe(200);
+  });
 });
