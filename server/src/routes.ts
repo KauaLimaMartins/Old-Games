@@ -26,6 +26,7 @@ routes.use(authMiddleware);
 
 routes.post('/games', upload.single('image'), GameController.store);
 routes.put('/games/:id', upload.single('image'), GameController.update);
+routes.delete('/games/:id', GameController.destroy);
 
 routes.delete('/users', UserController.destroy);
 routes.put('/users', UserController.update);
