@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2017",
     "module": "commonjs",
     "outDir": "./dist",
+    "rootDir": "./",
+    "lib": ["ES6"],
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "allowJs": true,
     "strict": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "rootDir": "./",
-    "baseUrl": "./src",
     "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@config/*": ["config/*"],
-      "@utils/*": ["utils/*"]
-    }
+    "removeComments": true
   }
 }
