@@ -21,10 +21,13 @@ routes.get('/consoles', ConsoleController.index);
 routes.get('/games/:id', GameController.show);
 routes.get('/games', GameController.index);
 
+// The routes below this middleware need authentication to be accessed
 routes.use(authMiddleware);
 
 routes.post('/games', upload.single('image'), GameController.store);
+routes.put('/games/:id', GameController.update);
 
 routes.delete('/users', UserController.destroy);
+routes.put('/users', UserController.update);
 
 export default routes;
