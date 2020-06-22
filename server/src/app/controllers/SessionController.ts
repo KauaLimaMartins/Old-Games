@@ -44,7 +44,7 @@ class SessionController {
       expiresIn: authConfig.expiresIn,
     });
 
-    return res.json({ user, token });
+    return res.json({ user: { name: user.name }, token });
   }
 }
 

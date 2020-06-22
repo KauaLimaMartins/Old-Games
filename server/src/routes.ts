@@ -12,14 +12,14 @@ import multerConfig from '@configs/multer';
 const routes = Router();
 const upload = multer(multerConfig);
 
-routes.post('/users', UserController.store);
-
-routes.post('/sessions', SessionController.store);
-
 routes.get('/consoles', ConsoleController.index);
 
 routes.get('/games/:id', GameController.show);
 routes.get('/games', GameController.index);
+
+routes.post('/users', UserController.store);
+
+routes.post('/sessions', SessionController.store);
 
 // The routes below this middleware need authentication to be accessed
 routes.use(authMiddleware);
