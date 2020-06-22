@@ -65,7 +65,18 @@ class GameController {
       image_url: `http://192.168.15.7:4000/uploads/${game.image}`,
     };
 
-    return res.json({ game: serializedGame, consoleTitle });
+    const owner = await prisma.users.findOne({
+      where: {
+        id: serializedGame.owner_id,
+      },
+      select: {
+        name: true,
+        email: true,
+        whatsapp: true,
+      },
+    });
+
+    return res.json({ game: serializedGame, owner, consoleTitle });
   }
 
   public async store(req: Request, res: Response): Promise<Response> {
@@ -95,7 +106,7 @@ class GameController {
 
     const game = await prisma.games.create({
       data: {
-        image: 'req.file.filename',
+        image: req.file !== undefined ? req.file.filename : 'no-image',
         game_name,
         game_description,
         latitude: Number(latitude),
@@ -116,7 +127,7 @@ class GameController {
         data: {
           consoles: {
             connect: {
-              id: console_id,
+              id: Number(console_id),
             },
           },
           games: {
@@ -153,7 +164,7 @@ class GameController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { id } = req.query;
+    const { id } = req.params;
 
     const game = await prisma.games.findOne({
       where: {
@@ -184,7 +195,7 @@ class GameController {
   }
 
   public async destroy(req: Request, res: Response): Promise<Response> {
-    const { id } = req.query;
+    const { id } = req.params;
 
     const game = await prisma.games.findOne({
       where: {
@@ -198,11 +209,13 @@ class GameController {
         .json({ error: 'You can only delete games that you have registered' });
     }
 
-    await prisma.games.delete({
-      where: {
-        id: Number(id),
-      },
-    });
+    // await prisma.games.delete({
+    //   where: {
+    //     id: Number(id),
+    //   },
+    // });
+
+    await prisma.queryRaw`DELETE FROM games WHERE id = ${Number(id)}`;
 
     return res.status(200).send();
   }

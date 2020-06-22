@@ -20,8 +20,6 @@ class App {
   }
 
   private router(): void {
-    this.app.use(routes);
-
     this.app.use(
       '/consoles',
       express.static(path.resolve(__dirname, '..', 'temp', 'consoles'))
@@ -30,6 +28,7 @@ class App {
       '/uploads',
       express.static(path.resolve(__dirname, '..', 'temp', 'uploads'))
     );
+    this.app.use(routes);
   }
 }
 

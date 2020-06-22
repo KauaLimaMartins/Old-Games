@@ -11,7 +11,7 @@ class UserController {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string().required().email(),
-      whatsapp: Yup.string().required(),
+      whatsapp: Yup.string().required().min(11).max(11),
       password: Yup.string().min(6).required(),
     });
 
@@ -55,17 +55,12 @@ class UserController {
         .when(
           'oldPassword',
           (oldPassword: string, field: Yup.StringSchema<string>) =>
-            // this is literaly if (oldPassword !== '') {
-            //     password is required;
-            // } else {
-            //     password is not required;
-            // }
             oldPassword ? field.required() : field
         ),
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Validation Fails' });
     }
 
     const { email, whatsapp, password, oldPassword } = req.body;
@@ -88,14 +83,31 @@ class UserController {
       }
     }
 
-    if (
-      oldPassword &&
-      !(await Password.checkHash(oldPassword, String(user?.password_hash)))
-    ) {
-      return res.status(401).json({ error: 'Password does not match' });
-    }
+    if (oldPassword !== undefined) {
+      const passwordIsValid = await Password.checkHash(
+        oldPassword,
+        String(user?.password_hash)
+      );
 
-    const newPasswordHash = await Password.generateHash(password);
+      if (!passwordIsValid) {
+        return res.status(401).json({ error: 'Password does not match' });
+      }
+
+      const newPasswordHash = await Password.generateHash(password);
+
+      await prisma.users.update({
+        where: {
+          id: req.userId,
+        },
+        data: {
+          email,
+          whatsapp,
+          password_hash: newPasswordHash,
+        },
+      });
+
+      return res.json({ email, whatsapp });
+    }
 
     await prisma.users.update({
       where: {
@@ -104,8 +116,6 @@ class UserController {
       data: {
         email,
         whatsapp,
-        password_hash:
-          oldPassword !== '' ? newPasswordHash : user?.password_hash,
       },
     });
 
@@ -113,17 +123,7 @@ class UserController {
   }
 
   public async destroy(req: Request, res: Response): Promise<Response> {
-    const user = await prisma.users.findOne({
-      where: {
-        id: Number(req.userId),
-      },
-    });
-
-    await prisma.users.delete({
-      where: {
-        id: user?.id,
-      },
-    });
+    await prisma.queryRaw`DELETE FROM users WHERE id = ${req.userId}`;
 
     return res.status(200).send();
   }

@@ -18,8 +18,8 @@ describe('Users', function (): void {
     const body = {
       name: 'test3',
       email: 'test8@test.com.br',
-      whatsapp: '1920930192',
-      password: '123456',
+      whatsapp: '11974347639',
+      password: '1234567',
     };
 
     const response = await request(app).post('/users').send(body);
@@ -33,8 +33,6 @@ describe('Users', function (): void {
     const body = {
       email: 'test7@test.com.br',
       whatsapp: '119888',
-      oldPassword: '123456',
-      password: '123456789',
     };
 
     const hash = await Password.generateHash('123456');

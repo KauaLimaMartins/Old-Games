@@ -105,7 +105,6 @@ describe('Games', function (): void {
 
     const response = await request(app)
       .put(`/games/${game.id}`)
-      .query({ id: game.id })
       .set('Authorization', 'barer ' + auth.body.token);
 
     expect(response.status).toBe(200);
@@ -151,7 +150,6 @@ describe('Games', function (): void {
 
     const response = await request(app)
       .delete(`/games/${game.id}`)
-      .query({ id: game.id })
       .set('Authorization', 'barer ' + auth.body.token);
 
     expect(response.status).toBe(200);
