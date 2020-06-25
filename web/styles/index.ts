@@ -37,9 +37,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
-
-    font-family: Ubuntu, Helvetica, sans-serif;
+    font-family: 'Ubuntu', Helvetica, sans-serif;
     font-weight: bold;
     font-size: 3.5rem;
 
