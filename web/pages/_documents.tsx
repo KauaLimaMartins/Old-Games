@@ -20,6 +20,10 @@ export default class MyDocument extends Document {
                     <Html lang="pt-BR">
                         {initialProps.styles}
                         <link rel="con" href="/favicon.ico" />
+                        <link
+                            href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"
+                            rel="stylesheet"
+                        />
                         {sheet.getStyleElement()}
                     </Html>
                 ),

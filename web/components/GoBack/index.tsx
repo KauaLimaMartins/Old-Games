@@ -8,7 +8,7 @@ const GoBack: React.FC = () => {
         <Link href="/">
             <Container>
                 <Icon />
-                <Text>Voltar para home</Text>
+                <Text>Sair da conta</Text>
             </Container>
         </Link>
     );

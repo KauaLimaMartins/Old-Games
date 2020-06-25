@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FiArrowLeft } from 'react-icons/fi';
+import { BsBoxArrowInLeft } from 'react-icons/bs';
 
 export const Container = styled.div`
     display: Flex;
@@ -23,7 +23,7 @@ export const Container = styled.div`
     }
 `;
 
-export const Icon = styled(FiArrowLeft).attrs({
+export const Icon = styled(BsBoxArrowInLeft).attrs({
     size: 24,
 })`
     color: #ac38ff;
