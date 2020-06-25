@@ -103,7 +103,9 @@ const Register: React.FC = () => {
                             placeholder="Senha"
                             onChange={handleInputChange}
                         />
-                        <Button type="submit">Registrar</Button>
+                        <Link href="/dashboard">
+                            <Button type="submit">Entrar</Button>
+                        </Link>
                     </CenterRightContainer>
                 </CenterContainer>
             </Container>

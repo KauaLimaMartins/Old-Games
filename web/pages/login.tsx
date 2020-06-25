@@ -73,7 +73,9 @@ const Login: React.FC = () => {
                             placeholder="Senha"
                             onChange={handleInputChange}
                         />
-                        <Button>Entrar</Button>
+                        <Link href="/dashboard">
+                            <Button>Entrar</Button>
+                        </Link>
                     </CenterLeftContainer>
 
                     <CenterRightContainer>
