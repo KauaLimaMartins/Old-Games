@@ -141,6 +141,9 @@ export const Button = styled.button`
     &:hover {
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     }
+    &:active {
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
 
     animation: collors 4s infinite;
 `;
@@ -232,6 +235,11 @@ export const ButtonLeft = styled.button`
     }
 
     &:hover {
+        border: none;
+        color: #ac38ff;
+        background: #fff;
+    }
+    &:active {
         border: none;
         color: #ac38ff;
         background: #fff;

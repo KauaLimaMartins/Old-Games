@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { DefaultSeo } from 'next-seo';
 import { MdSettings, MdAdd } from 'react-icons/md';
 
@@ -34,126 +35,62 @@ const DashBoard: React.FC = () => {
                     <p>Adicionar game</p>
                 </ButtonAddGame>
                 <ListGamesContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
-                    <GameContainer>
-                        <GameImage
-                            src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
-                            alt="game image"
-                        />
-                        <GameTitle>Minecraft</GameTitle>
-                        <GameConsole>Xbox One</GameConsole>
-                        <GameDescription>
-                            Minecraft é um jogo muito top mesmo, não tem nem
-                            comparação com outros jogos.
-                        </GameDescription>
-                    </GameContainer>
+                    <Link href="/edit-game">
+                        <GameContainer>
+                            <GameImage
+                                src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
+                                alt="game image"
+                            />
+                            <GameTitle>Minecraft</GameTitle>
+                            <GameConsole>Xbox One</GameConsole>
+                            <GameDescription>
+                                Minecraft é um jogo muito top mesmo, não tem nem
+                                comparação com outros jogos.
+                            </GameDescription>
+                        </GameContainer>
+                    </Link>
+                    <Link href="/edit-game">
+                        <GameContainer>
+                            <GameImage
+                                src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
+                                alt="game image"
+                            />
+                            <GameTitle>Minecraft</GameTitle>
+                            <GameConsole>Xbox One</GameConsole>
+                            <GameDescription>
+                                Minecraft é um jogo muito top mesmo, não tem nem
+                                comparação com outros jogos.
+                            </GameDescription>
+                        </GameContainer>
+                    </Link>
+                    <Link href="/edit-game">
+                        <GameContainer>
+                            <GameImage
+                                src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
+                                alt="game image"
+                            />
+                            <GameTitle>Minecraft</GameTitle>
+                            <GameConsole>Xbox One</GameConsole>
+                            <GameDescription>
+                                Minecraft é um jogo muito top mesmo, não tem nem
+                                comparação com outros jogos.
+                            </GameDescription>
+                        </GameContainer>
+                    </Link>
+                    <Link href="/edit-game">
+                        <GameContainer>
+                            <GameImage
+                                src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg"
+                                alt="game image"
+                            />
+                            <GameTitle>Minecraft</GameTitle>
+                            <GameConsole>Xbox One</GameConsole>
+                            <GameDescription>
+                                Minecraft é um jogo muito top mesmo, não tem nem
+                                comparação com outros jogos.
+                            </GameDescription>
+                        </GameContainer>
+                    </Link>
                 </ListGamesContainer>
             </Container>
         </>
