@@ -36,6 +36,8 @@ class SessionController {
       user.password_hash
     );
 
+    console.log('é o password');
+
     if (!passworExists) {
       return res.status(401).json({ error: 'Invalid password' });
     }
