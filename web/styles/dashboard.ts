@@ -62,6 +62,9 @@ export const ButtonAddGame = styled.button`
     &:hover {
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     }
+    &:active {
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
 
     p {
         color: #fff;
@@ -98,12 +101,16 @@ export const GameContainer = styled.div`
     background: #fff;
     border-radius: 10px;
     justify-self: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 
     transition: 0.2s;
 
     &:hover {
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+    &:active {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     }
 `;
 

@@ -103,6 +103,17 @@ export const ButtonContainer = styled.div`
             background: #a220ff;
         }
     }
+    &:active {
+        cursor: pointer;
+
+        div#left-button {
+            background: #ac38ff;
+        }
+
+        div#right-button {
+            background: #a220ff;
+        }
+    }
 `;
 
 export const LeftSideButton = styled.div`
@@ -150,6 +161,10 @@ export const RegisterText = styled.a`
     }
 
     span:hover {
+        color: #ac38ff;
+        text-decoration: underline;
+    }
+    span:active {
         color: #ac38ff;
         text-decoration: underline;
     }

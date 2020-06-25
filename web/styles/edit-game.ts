@@ -30,9 +30,9 @@ export const CenterContainer = styled.div`
 
     transition: all 0.6s ease-in-out;
 
-    @media (max-width: 870px) {
-        width: 95vw;
-        height: 95vh;
+    @media (max-width: 1024px) {
+        width: 90vw;
+        height: 90vh;
     }
 
     @media (max-width: 768px) {
@@ -46,7 +46,7 @@ export const CenterLeftContainer = styled.form`
     width: 60%;
     height: 100%;
     display: flex;
-    background: url('/background.png') #fff no-repeat center;
+    background: url('/background2.png') #fff no-repeat center;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -78,73 +78,6 @@ export const CenterLeftContainer = styled.form`
     }
 `;
 
-export const Title = styled.h1`
-    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-    color: #333;
-    font-family: Helvetica, sans-serif;
-    font-size: 42px;
-
-    @media (max-width: 425px) {
-        font-size: 32px;
-    }
-`;
-
-export const Description = styled.p`
-    color: #555;
-    font-size: 1.2rem;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    margin-bottom: 18px;
-
-    @media (max-width: 425px) {
-        font-size: 1.1rem;
-    }
-`;
-
-export const Input = styled.input`
-    height: 100%;
-    font-size: 1.2rem;
-    color: #444;
-    border-radius: 4px;
-    background-color: #eee;
-    border: none;
-    padding: 12px 15px;
-    border: 1px #dedede solid;
-    width: 60%;
-    height: 45px;
-    margin: 10px 0 0;
-
-    &:focus {
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
-    }
-
-    @media (max-width: 768px) {
-        width: 80%;
-    }
-`;
-
-export const Button = styled.button`
-    width: 180px;
-    height: 50px;
-    margin-top: 15px;
-    border: none;
-    background: #ac38ff;
-    color: #fff;
-    font-size: 1.3rem;
-    border-radius: 25px;
-
-    transition: 0.2s;
-
-    &:hover {
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    }
-    &:active {
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    animation: collors 4s infinite;
-`;
-
 export const CenterRightContainer = styled.div`
     width: 40%;
     height: 100%;
@@ -174,6 +107,58 @@ export const CenterRightContainer = styled.div`
     }
 `;
 
+export const Image = styled.img`
+    width: auto;
+    max-width: 70%;
+    height: auto;
+    border-radius: 10px;
+    max-height: 60%;
+    margin-bottom: 20px;
+`;
+
+export const Input = styled.input`
+    height: 100%;
+    width: 60%;
+    font-size: 1.2rem;
+    color: #444;
+    border-radius: 4px;
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    border: 1px #dedede solid;
+    height: 45px;
+    margin: 10px 0 0;
+
+    &:focus {
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        width: 80%;
+    }
+`;
+
+export const CancelEdition = styled.p`
+    font-size: 14px;
+    color: #dedede;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 5px;
+
+    a {
+        color: #dedede;
+        text-decoration: underline;
+        transition: 0.4s;
+        cursor: pointer;
+
+        &:hover {
+            color: #fff;
+        }
+        &:active {
+            color: #fff;
+        }
+    }
+`;
+
 export const TitleRight = styled.h1`
     color: #fff;
     font-size: 40px;
@@ -181,9 +166,8 @@ export const TitleRight = styled.h1`
     font-family: Helvetica, sans-serif;
     margin-bottom: 10px;
 
-    @media (max-width: 425px) {
-        font-size: 30px;
-        margin-bottom: 5px;
+    @media (max-width: 767px) {
+        display: none;
     }
 `;
 
@@ -196,7 +180,6 @@ export const DescriptionRight = styled.p`
 
     @media (max-width: 425px) {
         font-size: 1.2rem;
-        margin-bottom: 15px;
     }
 `;
 
