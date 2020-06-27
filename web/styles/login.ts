@@ -14,7 +14,7 @@ export const CenterContainer = styled.div`
     width: 75vw;
     height: 75vh;
     background: #fff;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
 
     animation: shows 1s linear alternate;
 

@@ -30,10 +30,13 @@ const DashBoard: React.FC = () => {
                     <MdSettings size={26} id="settings" />
                 </Header>
 
-                <ButtonAddGame>
-                    <MdAdd color="#FFF" size={20} />
-                    <p>Adicionar game</p>
-                </ButtonAddGame>
+                <Link href="/create-game">
+                    <ButtonAddGame>
+                        <MdAdd color="#FFF" size={20} />
+                        <p>Adicionar game</p>
+                    </ButtonAddGame>
+                </Link>
+
                 <ListGamesContainer>
                     <Link href="/edit-game">
                         <GameContainer>
