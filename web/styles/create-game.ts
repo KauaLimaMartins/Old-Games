@@ -62,7 +62,7 @@ export const Header = styled.header`
 export const CenterContainer = styled.form`
     width: 60%;
     height: auto;
-    background: #fff;
+    background: #fff url('/background3.png') no-repeat center;
     display: flex;
     flex-direction: column;
     align-items: center;
