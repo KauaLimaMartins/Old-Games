@@ -11,13 +11,12 @@
     },
     "dependencies": {
         "axios": "^0.19.2",
-        "leaflet": "^1.6.0",
         "next": "^9.4.4",
         "next-seo": "^4.5.0",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
+        "react-dropzone": "^11.0.1",
         "react-icons": "^3.10.0",
-        "react-leaflet": "^2.7.0",
         "styled-components": "^5.1.1"
     },
     "devDependencies": {
@@ -25,7 +24,6 @@
         "@types/node": "^14.0.13",
         "@types/react": "^16.9.36",
         "@types/react-dom": "^16.9.8",
-        "@types/react-leaflet": "^2.5.1",
         "@types/styled-components": "^5.1.0",
         "@zeit/next-typescript": "^1.1.1",
         "babel-plugin-styled-components": "^1.10.7",
