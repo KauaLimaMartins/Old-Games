@@ -10,6 +10,7 @@ export const Container = styled.div`
     height: 250px;
     margin: 30px 0 10px;
 
+    transition: 0.2s;
     animation: bgcolor 4s infinite;
     background: #d191ff;
 
@@ -25,6 +26,13 @@ export const Container = styled.div`
         100% {
             background: #d191ff;
         }
+    }
+
+    &:hover {
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    &:active {
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     p {
