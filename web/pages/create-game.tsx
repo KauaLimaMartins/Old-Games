@@ -1,6 +1,7 @@
 import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { GetServerSideProps } from 'next';
 import { IoMdArrowBack } from 'react-icons/io';
 import { DefaultSeo } from 'next-seo';
 
@@ -17,15 +18,46 @@ import {
     Button,
 } from '../styles/create-game';
 
-const CreateGame: React.FC = () => {
+interface Props {
+    ufs: string[];
+}
+
+interface IBGEUFResponse {
+    id: number;
+    sigla: string;
+}
+
+interface IBGECityResponse {
+    nome: string;
+}
+
+const CreateGame: React.FC<Props> = ({ ufs }) => {
     const [location, setLocation] = useState<[number, number]>([0, 0]);
+    const [cities, setCities] = useState<string[]>([]);
+
+    const [selectedUf, setSelectedUf] = useState('0');
+    const [selectedCity, setSelectedCity] = useState('0');
+
     const [formData, setFormData] = useState({
         game_name: '',
         game_description: '',
-        latitude: 0,
-        longitude: 0,
     });
+
     const [selectedFile, setSelectedFile] = useState<File>();
+
+    useEffect(() => {
+        if (selectedUf === '0') {
+            return;
+        }
+        axios
+            .get<IBGECityResponse[]>(
+                `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`
+            )
+            .then((response) => {
+                const cityNames = response.data.map((city) => city.nome);
+                setCities(cityNames);
+            });
+    }, [selectedUf]);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -35,6 +67,8 @@ const CreateGame: React.FC = () => {
         });
     }, []);
 
+    useEffect(() => {});
+
     function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
         const { name, value } = event.target;
 
@@ -42,14 +76,36 @@ const CreateGame: React.FC = () => {
             ...formData,
             [name]: value,
         });
+    }
 
-        console.log(formData);
+    function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
+        const uf = event.target.value;
+
+        setSelectedUf(uf);
+    }
+
+    function handleSelectCity(event: ChangeEvent<HTMLSelectElement>) {
+        const city = event.target.value;
+
+        setSelectedCity(city);
     }
 
     function handleSubmit(event: FormEvent): void {
         event.preventDefault();
 
-        console.log(selectedFile);
+        const [latitude, longitude] = location;
+
+        const data = {
+            game_name: formData.game_name,
+            game_description: formData.game_description,
+            latitude,
+            longitude,
+            image: selectedFile,
+            uf: selectedUf,
+            city: selectedCity,
+        };
+
+        console.log(data);
     }
 
     return (
@@ -97,11 +153,31 @@ const CreateGame: React.FC = () => {
                         />
                     </div>
                     <div id="selects">
-                        <Select className="uf">
+                        <Select
+                            name="uf"
+                            className="uf"
+                            value={selectedUf}
+                            onChange={handleSelectUf}
+                        >
                             <option value="0">Selecione uma UF</option>
+                            {ufs.map((uf) => (
+                                <option key={uf} value={uf}>
+                                    {uf}
+                                </option>
+                            ))}
                         </Select>
-                        <Select className="city">
+                        <Select
+                            name="city"
+                            className="city"
+                            value={selectedCity}
+                            onChange={handleSelectCity}
+                        >
                             <option value="0">Selecione uma Cidade</option>
+                            {cities.map((city) => (
+                                <option key={city} value={city}>
+                                    {city}
+                                </option>
+                            ))}
                         </Select>
                     </div>
                     <Button type="submit">Finalizar</Button>
@@ -109,6 +185,26 @@ const CreateGame: React.FC = () => {
             </Container>
         </>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (
+    context
+) => {
+    const ufs = await axios
+        .get<IBGEUFResponse[]>(
+            'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
+        )
+        .then((response) => {
+            const ufInitials = response.data.map((uf) => uf.sigla);
+
+            return ufInitials;
+        });
+
+    return {
+        props: {
+            ufs,
+        },
+    };
 };
 
 export default CreateGame;
