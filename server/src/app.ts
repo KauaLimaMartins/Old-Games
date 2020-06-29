@@ -21,7 +21,7 @@ class App {
 
   private router(): void {
     this.app.use(
-      '/consoles',
+      '/console-image',
       express.static(path.resolve(__dirname, '..', 'temp', 'consoles'))
     );
     this.app.use(
