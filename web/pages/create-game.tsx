@@ -16,10 +16,19 @@ import {
     Input,
     Select,
     Button,
+    GridConsoles,
+    FieldTitle,
 } from '../styles/create-game';
+
+interface Item {
+    id: number;
+    title: string;
+    image_url: string;
+}
 
 interface Props {
     ufs: string[];
+    consoles: Item[];
 }
 
 interface IBGEUFResponse {
@@ -31,12 +40,13 @@ interface IBGECityResponse {
     nome: string;
 }
 
-const CreateGame: React.FC<Props> = ({ ufs }) => {
+const CreateGame: React.FC<Props> = ({ ufs, consoles }) => {
     const [location, setLocation] = useState<[number, number]>([0, 0]);
     const [cities, setCities] = useState<string[]>([]);
 
     const [selectedUf, setSelectedUf] = useState('0');
     const [selectedCity, setSelectedCity] = useState('0');
+    const [selectedConsole, setSelectedConsole] = useState(0);
 
     const [formData, setFormData] = useState({
         game_name: '',
@@ -90,6 +100,10 @@ const CreateGame: React.FC<Props> = ({ ufs }) => {
         setSelectedCity(city);
     }
 
+    function handleSelectConsole(id: number) {
+        setSelectedConsole(id);
+    }
+
     function handleSubmit(event: FormEvent): void {
         event.preventDefault();
 
@@ -124,8 +138,10 @@ const CreateGame: React.FC<Props> = ({ ufs }) => {
                 </Header>
 
                 <CenterContainer onSubmit={handleSubmit}>
+                    <FieldTitle>Imagem</FieldTitle>
                     <Dropzone onFileUploaded={setSelectedFile} />
 
+                    <FieldTitle>Informações</FieldTitle>
                     <Input
                         name="game_name"
                         placeholder="Nome do jogo"
@@ -141,15 +157,23 @@ const CreateGame: React.FC<Props> = ({ ufs }) => {
                             name="latitude"
                             className="lat"
                             placeholder="Latitude"
+                            value={
+                                location[0] === 0 || location[1] === 0
+                                    ? ''
+                                    : location[0]
+                            }
                             onChange={handleInputChange}
-                            value={location[0]}
                         />
                         <Input
                             name="longitude"
                             className="lon"
                             placeholder="Longitude"
+                            value={
+                                location[0] === 0 || location[1] === 0
+                                    ? ''
+                                    : location[1]
+                            }
                             onChange={handleInputChange}
-                            value={location[1]}
                         />
                     </div>
                     <div id="selects">
@@ -180,6 +204,24 @@ const CreateGame: React.FC<Props> = ({ ufs }) => {
                             ))}
                         </Select>
                     </div>
+
+                    <FieldTitle>Console</FieldTitle>
+                    <GridConsoles>
+                        {consoles.map((item) => (
+                            <li
+                                key={item.id}
+                                onClick={() => handleSelectConsole(item.id)}
+                                className={
+                                    selectedConsole === item.id
+                                        ? 'selected'
+                                        : ''
+                                }
+                            >
+                                <img src={item.image_url} />
+                                <span>{item.title}</span>
+                            </li>
+                        ))}
+                    </GridConsoles>
                     <Button type="submit">Finalizar</Button>
                 </CenterContainer>
             </Container>
@@ -187,9 +229,7 @@ const CreateGame: React.FC<Props> = ({ ufs }) => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-    context
-) => {
+export const getServerSideProps: GetServerSideProps<Props> = async (_) => {
     const ufs = await axios
         .get<IBGEUFResponse[]>(
             'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
@@ -200,9 +240,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
             return ufInitials;
         });
 
+    const consoles = await axios
+        .get<Item[]>(`${process.env.SERVER}/consoles`)
+        .then((response) => {
+            return response.data;
+        });
+
     return {
         props: {
             ufs,
+            consoles,
         },
     };
 };
