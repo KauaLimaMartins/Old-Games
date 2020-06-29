@@ -52,19 +52,20 @@ export const CenterLeftContainer = styled.form`
     flex-direction: column;
 
     svg {
-        margin-left: 4px;
+        margin-left: 8px;
+        animation: texts 4s infinite;
         position: absolute;
         align-self: flex-start;
         justify-self: flex-start;
-        top: 13%;
+        top: 14%;
         cursor: pointer;
 
         @media (max-width: 870px) {
-            top: 4%;
+            top: 5%;
         }
 
         @media (max-width: 768px) {
-            top: 1%;
+            top: 2%;
         }
     }
 
