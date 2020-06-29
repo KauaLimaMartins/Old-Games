@@ -11,7 +11,7 @@ class ConsoleController {
       return {
         id: cnsl.id,
         title: cnsl.title,
-        image_url: `${process.env.APP_HOST}/consoles/${cnsl.image}`,
+        image_url: `http://localhost:4000/console-image/${cnsl.image}`,
       };
     });
 

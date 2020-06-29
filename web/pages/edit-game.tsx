@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { FaTrash } from 'react-icons/fa';
 import { DefaultSeo } from 'next-seo';
 
 import GlobalStyles from '../styles/global';
@@ -27,6 +28,8 @@ const EditGame: React.FC = () => {
             <Container>
                 <CenterContainer>
                     <CenterLeftContainer>
+                        <FaTrash size={18} />
+
                         <Image src="https://assets.b9.com.br/wp-content/uploads/2019/09/Minecraft_Box_Shot_.0-1200x720.jpg" />
 
                         <Input
