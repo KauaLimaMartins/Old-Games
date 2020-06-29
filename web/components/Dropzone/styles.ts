@@ -8,7 +8,7 @@ export const Container = styled.div`
     justify-content: center;
     width: 60%;
     height: 250px;
-    margin: 30px 0 10px;
+    margin: 10px 0;
 
     transition: 0.2s;
     animation: bgcolor 4s infinite;
@@ -46,6 +46,14 @@ export const Container = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    @media (max-width: 500px) {
+        width: 80%;
+    }
+
+    @media (max-width: 370px) {
+        width: 90%;
     }
 `;
 
