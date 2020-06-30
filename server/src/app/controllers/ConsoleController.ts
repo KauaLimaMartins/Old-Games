@@ -11,7 +11,7 @@ class ConsoleController {
       return {
         id: cnsl.id,
         title: cnsl.title,
-        image_url: `http://localhost:4000/console-image/${cnsl.image}`,
+        image_url: `http://192.168.15.7:4000/console-image/${cnsl.image}`,
       };
     });
 
