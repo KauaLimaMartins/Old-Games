@@ -40,7 +40,7 @@ const Register: React.FC = () => {
         event.preventDefault();
 
         const response = await axios.post(
-            'http://localhost:4000/users',
+            `${process.env.SERVER}/users`,
             formData
         );
 

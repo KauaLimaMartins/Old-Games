@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { DefaultSeo } from 'next-seo';
-import { MdSettings, MdAdd } from 'react-icons/md';
+import { MdAdd } from 'react-icons/md';
 
 import SEO from '../next-seo.config';
 import GlobalStyles from '../styles/global';
@@ -27,7 +27,9 @@ const DashBoard: React.FC = () => {
             <Container>
                 <Header>
                     <GoBack />
-                    <MdSettings size={26} id="settings" />
+                    {/* <Link href="/settings">
+                        <MdSettings size={26} id="settings" />
+                    </Link> */}
                 </Header>
 
                 <Link href="/create-game">
@@ -36,7 +38,6 @@ const DashBoard: React.FC = () => {
                         <p>Adicionar game</p>
                     </ButtonAddGame>
                 </Link>
-
                 <ListGamesContainer>
                     <Link href="/edit-game">
                         <GameContainer>
