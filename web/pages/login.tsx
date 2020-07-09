@@ -2,10 +2,11 @@ import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { GrFormClose } from 'react-icons/gr';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
+import Router from 'next/router';
 import axios from 'axios';
 
 import GlobalStyles from '../styles/global';
-
+import sumDays from '../utils/sumDays';
 import SEO from '../next-seo.config';
 
 import {
@@ -22,6 +23,13 @@ import {
     TitleRight,
 } from '../styles/login';
 
+interface ResponseLogin {
+    token: string;
+    user: {
+        name: string;
+    };
+}
+
 const Login: React.FC = () => {
     const [formData, setFormData] = useState({
         email: '',
@@ -37,12 +45,25 @@ const Login: React.FC = () => {
     async function handleSubmit(event: FormEvent): Promise<void> {
         event.preventDefault();
 
-        const response = await axios.post(
-            'http://localhost:4000/sessions',
-            formData
-        );
+        try {
+            var response = await axios.post<ResponseLogin>(
+                `${process.env.SERVER}/sessions`,
+                formData
+            );
 
-        console.log(response);
+            const expiration = sumDays(new Date(), 3);
+
+            const [correctData] = expiration.toString().split(' (');
+
+            // document.cookie = `token=; expires=Wed Jul 15 2000 16:20:10 GMT-0300`;
+            document.cookie = `token=${response.data.token}; expires=${correctData}`;
+
+            alert('DEU CERTO 🤩');
+
+            Router.push('/dashboard');
+        } catch (err) {
+            alert('Erro');
+        }
     }
 
     return (
@@ -73,9 +94,9 @@ const Login: React.FC = () => {
                             placeholder="Senha"
                             onChange={handleInputChange}
                         />
-                        <Link href="/dashboard">
-                            <Button>Entrar</Button>
-                        </Link>
+                        {/* <Link href="/dashboard"> */}
+                        <Button>Entrar</Button>
+                        {/* </Link> */}
                     </CenterLeftContainer>
 
                     <CenterRightContainer>

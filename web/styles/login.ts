@@ -16,7 +16,7 @@ export const CenterContainer = styled.div`
     background: #fff;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
 
-    animation: shows 1s linear alternate;
+    animation: shows 0.8s linear alternate;
 
     @keyframes shows {
         0% {
@@ -111,6 +111,7 @@ export const Input = styled.input`
     padding: 12px 15px;
     border: 1px #dedede solid;
     width: 60%;
+    animation: input-show 0.8s linear;
     height: 45px;
     margin: 10px 0 0;
 
@@ -120,6 +121,27 @@ export const Input = styled.input`
 
     @media (max-width: 768px) {
         width: 80%;
+        animation: input-responsive-show 0.8s linear;
+
+        @keyframes input-responsive-show {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 80%;
+            }
+        }
+    }
+
+    @keyframes input-show {
+        from {
+            width: 0%;
+        }
+
+        to {
+            width: 60%;
+        }
     }
 `;
 
