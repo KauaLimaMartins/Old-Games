@@ -1,6 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { GrFormClose } from 'react-icons/gr';
 import { NextSeo } from 'next-seo';
+import Router from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
 
@@ -39,12 +40,18 @@ const Register: React.FC = () => {
     async function handleSubmit(event: FormEvent): Promise<void> {
         event.preventDefault();
 
-        const response = await axios.post(
-            `${process.env.SERVER}/users`,
-            formData
-        );
+        try {
+            const response = await axios.post(
+                `${process.env.SERVER}/users`,
+                formData
+            );
 
-        console.log(response);
+            alert('DEU CERTO 🤩');
+
+            Router.push('/login');
+        } catch (err) {
+            alert('Erro');
+        }
     }
 
     return (
@@ -103,9 +110,7 @@ const Register: React.FC = () => {
                             placeholder="Senha"
                             onChange={handleInputChange}
                         />
-                        <Link href="/dashboard">
-                            <Button type="submit">Entrar</Button>
-                        </Link>
+                        <Button type="submit">Entrar</Button>
                     </CenterRightContainer>
                 </CenterContainer>
             </Container>

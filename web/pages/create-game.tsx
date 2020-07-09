@@ -3,10 +3,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import { IoMdArrowBack } from 'react-icons/io';
-import { DefaultSeo } from 'next-seo';
 
-import SEO from '../next-seo.config';
-import GlobalStyles from '../styles/global';
 import Dropzone from '../components/Dropzone';
 
 import {
@@ -123,109 +120,102 @@ const CreateGame: React.FC<Props> = ({ ufs, consoles }) => {
     }
 
     return (
-        <>
-            <DefaultSeo {...SEO} />
-            <GlobalStyles />
+        <Container>
+            <Header>
+                <Link href="/dashboard">
+                    <div>
+                        <IoMdArrowBack size={22} />
+                        <p>Voltar</p>
+                    </div>
+                </Link>
+            </Header>
 
-            <Container>
-                <Header>
-                    <Link href="/dashboard">
-                        <div>
-                            <IoMdArrowBack size={22} />
-                            <p>Voltar</p>
-                        </div>
-                    </Link>
-                </Header>
+            <CenterContainer onSubmit={handleSubmit}>
+                <FieldTitle>Imagem</FieldTitle>
+                <Dropzone onFileUploaded={setSelectedFile} />
 
-                <CenterContainer onSubmit={handleSubmit}>
-                    <FieldTitle>Imagem</FieldTitle>
-                    <Dropzone onFileUploaded={setSelectedFile} />
-
-                    <FieldTitle>Informações</FieldTitle>
+                <FieldTitle>Informações</FieldTitle>
+                <Input
+                    name="game_name"
+                    placeholder="Nome do jogo"
+                    onChange={handleInputChange}
+                />
+                <Input
+                    name="game_description"
+                    placeholder="Descrição do jogo"
+                    onChange={handleInputChange}
+                />
+                <div id="lat-lon">
                     <Input
-                        name="game_name"
-                        placeholder="Nome do jogo"
+                        name="latitude"
+                        className="lat"
+                        placeholder="Latitude"
+                        value={
+                            location[0] === 0 || location[1] === 0
+                                ? ''
+                                : location[0]
+                        }
                         onChange={handleInputChange}
                     />
                     <Input
-                        name="game_description"
-                        placeholder="Descrição do jogo"
+                        name="longitude"
+                        className="lon"
+                        placeholder="Longitude"
+                        value={
+                            location[0] === 0 || location[1] === 0
+                                ? ''
+                                : location[1]
+                        }
                         onChange={handleInputChange}
                     />
-                    <div id="lat-lon">
-                        <Input
-                            name="latitude"
-                            className="lat"
-                            placeholder="Latitude"
-                            value={
-                                location[0] === 0 || location[1] === 0
-                                    ? ''
-                                    : location[0]
-                            }
-                            onChange={handleInputChange}
-                        />
-                        <Input
-                            name="longitude"
-                            className="lon"
-                            placeholder="Longitude"
-                            value={
-                                location[0] === 0 || location[1] === 0
-                                    ? ''
-                                    : location[1]
-                            }
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div id="selects">
-                        <Select
-                            name="uf"
-                            className="uf"
-                            value={selectedUf}
-                            onChange={handleSelectUf}
-                        >
-                            <option value="0">Selecione uma UF</option>
-                            {ufs.map((uf) => (
-                                <option key={uf} value={uf}>
-                                    {uf}
-                                </option>
-                            ))}
-                        </Select>
-                        <Select
-                            name="city"
-                            className="city"
-                            value={selectedCity}
-                            onChange={handleSelectCity}
-                        >
-                            <option value="0">Selecione uma Cidade</option>
-                            {cities.map((city) => (
-                                <option key={city} value={city}>
-                                    {city}
-                                </option>
-                            ))}
-                        </Select>
-                    </div>
-
-                    <FieldTitle>Console</FieldTitle>
-                    <GridConsoles>
-                        {consoles.map((item) => (
-                            <li
-                                key={item.id}
-                                onClick={() => handleSelectConsole(item.id)}
-                                className={
-                                    selectedConsole === item.id
-                                        ? 'selected'
-                                        : ''
-                                }
-                            >
-                                <img src={item.image_url} />
-                                <span>{item.title}</span>
-                            </li>
+                </div>
+                <div id="selects">
+                    <Select
+                        name="uf"
+                        className="uf"
+                        value={selectedUf}
+                        onChange={handleSelectUf}
+                    >
+                        <option value="0">Selecione uma UF</option>
+                        {ufs.map((uf) => (
+                            <option key={uf} value={uf}>
+                                {uf}
+                            </option>
                         ))}
-                    </GridConsoles>
-                    <Button type="submit">Finalizar</Button>
-                </CenterContainer>
-            </Container>
-        </>
+                    </Select>
+                    <Select
+                        name="city"
+                        className="city"
+                        value={selectedCity}
+                        onChange={handleSelectCity}
+                    >
+                        <option value="0">Selecione uma Cidade</option>
+                        {cities.map((city) => (
+                            <option key={city} value={city}>
+                                {city}
+                            </option>
+                        ))}
+                    </Select>
+                </div>
+
+                <FieldTitle>Console</FieldTitle>
+                <GridConsoles>
+                    {consoles.map((item) => (
+                        <li
+                            key={item.id}
+                            onClick={() => handleSelectConsole(item.id)}
+                            className={
+                                selectedConsole === item.id ? 'selected' : ''
+                            }
+                        >
+                            <img src={item.image_url} />
+                            <span>{item.title}</span>
+                        </li>
+                    ))}
+                </GridConsoles>
+                <Button type="submit">Finalizar</Button>
+            </CenterContainer>
+        </Container>
     );
 };
 
